@@ -7,10 +7,12 @@ Namespaced global event emitter
 
 ## Usage
 
-It just exports an `EventEmitter`. Think of it as a singleton.
+Sparkles exports a function that returns a singleton `EventEmitter`.
+This EE can be shared across your application, whether or not node loads
+multiple copies.
 
 ```js
-var sparkles = require('sparkles');
+var sparkles = require('sparkles')(); // make sure to call the function
 
 sparkles.on('my-event', function(evt){
   console.log('my-event handled', evt);

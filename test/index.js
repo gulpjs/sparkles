@@ -9,13 +9,18 @@ var after = lab.after;
 var afterEach = lab.afterEach;
 var expect = require('code').expect;
 
-var sparkles = require('../');
-
 function noop(){}
 
 function noop2(){}
 
 describe('sparkles', function(){
+
+  var sparkles;
+
+  before(function(done){
+    sparkles = require('../')();
+    done();
+  });
 
   it('will attach an event emitter to global upon the first `on` call', function(done){
     expect(global.__sparklesEventEmitter).to.not.exist();
