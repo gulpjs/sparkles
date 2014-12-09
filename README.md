@@ -21,6 +21,10 @@ sparkles.on('my-event', function(evt){
 sparkles.emit('my-event', { my: 'event' });
 ```
 
+# Why the name?
+
+This is a "global emitter"; shortened: "glitter" but it was already taken; so we got sparkles instead :smile:
+
 ## License
 
 MIT
