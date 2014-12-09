@@ -1,0 +1,30 @@
+{
+  "name": "sparkles",
+  "version": "1.0.0",
+  "description": "Namespaced global event emitter",
+  "main": "index.js",
+  "scripts": {
+    "test": "lab -cv"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/phated/sparkles"
+  },
+  "keywords": [
+    "global",
+    "ee",
+    "events",
+    "emitter",
+    "namespaced"
+  ],
+  "author": "Blaine Bublitz <blaine@iceddev.com> (http://iceddev.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/phated/sparkles/issues"
+  },
+  "homepage": "https://github.com/phated/sparkles",
+  "dependencies": {
+    "code": "^1.2.1",
+    "lab": "^5.1.0"
+  }
+}
