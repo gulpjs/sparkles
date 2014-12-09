@@ -26,6 +26,7 @@ describe('sparkles', function(){
     expect(global.__sparklesEventEmitter).to.not.exist();
     sparkles.on('test', noop);
     expect(global.__sparklesEventEmitter).to.exist();
+    expect(global.__sparklesEventEmitter.on).to.be.a.function();
     done();
   });
 

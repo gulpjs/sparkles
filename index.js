@@ -23,7 +23,7 @@ function getEmitter(){
     }
 
     if(!global[namespace]){
-      global[namespace] = getEmitter;
+      global[namespace] = ee;
     }
   }
 
