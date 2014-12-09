@@ -1,6 +1,8 @@
 sparkles
 ========
 
+[![Build Status](https://travis-ci.org/phated/sparkles.svg?branch=master)](https://travis-ci.org/phated/sparkles)
+
 Namespaced global event emitter
 
 ## Usage
