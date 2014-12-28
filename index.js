@@ -35,31 +35,39 @@ function getEmitter(namespace){
     var removeListeners = ee.listeners('removeListener');
     var newListeners = ee.listeners('newListener');
 
+    // exit if we have events other than
+    // `removeListener` and `newListener`
     if(events.length > 2){
       return;
     }
 
-    if(removeListeners.length !== 1){
+    // exit if someone attached another
+    // listener to `removeListener`
+    if(removeListeners.length > 1){
       return;
     }
 
-    if(newListeners.length !== 1 && events.length !== 1){
+    // exit if someone attached another
+    // listener to `newListener`
+    if(newListeners.length > 1){
       return;
     }
 
     delete global[namespace];
-
-    process.nextTick(rewire);
   }
 
   function rewire(){
     var removeListeners = ee.listeners('removeListener');
     var newListeners = ee.listeners('newListener');
 
+    // if we know our `removeListener` isn't
+    // attached, we add it
     if(!removeListeners.length){
       ee.on('removeListener', detach);
     }
 
+    // if we know our `newListener` isn't
+    // attached, we add it
     if(!newListeners.length){
       ee.on('newListener', attach);
     }
