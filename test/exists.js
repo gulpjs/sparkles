@@ -13,19 +13,25 @@ var EventEmitter = require('events').EventEmitter;
 
 describe('namespace', function(){
 
-  var ee;
-  var sparkles;
-
-  before(function(done){
-    ee = global.__sparklesEventEmitter = new EventEmitter();
+  it('should use an EE from sparkles namespace if it already exists', function(done){
+    var ee = global.__sparklesEventEmitter = new EventEmitter();
     ee.custom = 'ee';
 
-    sparkles = require('../')();
+    var sparkles = require('../')();
+
+    expect(sparkles.custom).to.equal('ee');
+    sparkles.removeAllListeners();
+    expect(global.__sparklesEventEmitter).to.not.exist();
     done();
   });
 
-  it('should use an EE from sparkles namespace if it already exists', function(done){
-    expect(sparkles.custom).to.equal('ee');
+  it('should allow custom namespaces', function(done){
+    var ee = global.__myCustomNamespace = new EventEmitter();
+    ee.custom = true;
+
+    var sparkles = require('../')('__myCustomNamespace');
+
+    expect(sparkles.custom).to.equal(true);
     sparkles.removeAllListeners();
     expect(global.__sparklesEventEmitter).to.not.exist();
     done();

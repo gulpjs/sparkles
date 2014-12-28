@@ -2,9 +2,12 @@
 
 var EventEmitter = require('events').EventEmitter;
 
-var namespace = '__sparklesEventEmitter';
+var defaultNamespace = '__sparklesEventEmitter';
 
-function getEmitter(){
+function getEmitter(namespace){
+
+  namespace = namespace || defaultNamespace;
+
   var ee;
 
   if(global[namespace]){
