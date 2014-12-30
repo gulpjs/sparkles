@@ -15,7 +15,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "test": "lab -cv",
+    "test": "lab -cv --ignore store@sparkles",
     "lint": "jshint test index.js --reporter node_modules/jshint-stylish/stylish.js --exclude node_modules"
   },
   "dependencies": {},
