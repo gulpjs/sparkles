@@ -1,6 +1,6 @@
 {
   "name": "sparkles",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Namespaced global event emitter",
   "author": "Blaine Bublitz <blaine@iceddev.com> (http://iceddev.com/)",
   "contributors": [],
