@@ -5,13 +5,19 @@ var EventEmitter = require('events').EventEmitter;
 var sparklesNamespace = 'store@sparkles';
 var defaultNamespace = 'default';
 
-function getEmitter(namespace){
-
+function getStore(){
   var store = global[sparklesNamespace];
 
   if(!store){
     store = global[sparklesNamespace] = {};
   }
+
+  return store;
+}
+
+function getEmitter(namespace){
+
+  var store = getStore();
 
   namespace = namespace || defaultNamespace;
 
@@ -27,8 +33,13 @@ function getEmitter(namespace){
   }
 
   return ee;
+}
 
+function exists(namespace){
+  var store = getStore();
 
+  return !!(store[namespace]);
 }
 
 module.exports = getEmitter;
+module.exports.exists = exists;

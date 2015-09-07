@@ -3,27 +3,25 @@
 var lab = exports.lab = require('lab').script();
 var describe = lab.describe;
 var it = lab.it;
-var before = lab.before;
 var beforeEach = lab.beforeEach;
-var after = lab.after;
 var afterEach = lab.afterEach;
 var expect = require('code').expect;
 
+var sparkles = require('../');
+
 function noop(){}
 
-function noop2(){}
+describe('sparkles()', function(){
 
-describe('sparkles', function(){
-
-  var sparkles;
+  var ee;
 
   beforeEach(function(done){
-    sparkles = require('../')();
+    ee = sparkles();
     done();
   });
 
   afterEach(function(done){
-    sparkles.remove();
+    ee.remove();
     done();
   });
 
@@ -38,8 +36,8 @@ describe('sparkles', function(){
   });
 
   it('removes the event emitter from the store when remove is called', function(done){
-    sparkles.on('test', noop);
-    sparkles.remove();
+    ee.on('test', noop);
+    ee.remove();
     expect(global['store@sparkles']).to.not.include('default');
     done();
   });
