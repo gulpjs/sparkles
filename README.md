@@ -21,7 +21,18 @@ sparkles.on('my-event', function(evt){
 sparkles.emit('my-event', { my: 'event' });
 ```
 
-# Why the name?
+## API
+
+### sparkles(namespace)
+
+Returns an EventEmitter that is shared amongst the provided namespace.  If no namespace
+is provided, returns a default EventEmitter.
+
+### sparkles.exists(namespace);
+
+Checks whether a namespace exists and returns true or false.
+
+## Why the name?
 
 This is a "global emitter"; shortened: "glitter" but it was already taken; so we got sparkles instead :smile:
 
