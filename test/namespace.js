@@ -4,19 +4,19 @@ var expect = require('expect');
 
 var EventEmitter = require('events').EventEmitter;
 
-describe('namespace', function(){
+describe('namespace', function() {
 
-  beforeEach(function(done){
+  beforeEach(function(done) {
     global['store@sparkles'] = {};
     done();
   });
 
-  afterEach(function(done){
+  afterEach(function(done) {
     delete global['store@sparkles'];
     done();
   });
 
-  it('should use an EE from sparkles namespace if it already exists', function(done){
+  it('should use an EE from sparkles namespace if it already exists', function(done) {
     var ee = global['store@sparkles'].default = new EventEmitter();
     ee.custom = 'ee';
 
@@ -26,7 +26,7 @@ describe('namespace', function(){
     done();
   });
 
-  it('should allow custom namespaces', function(done){
+  it('should allow custom namespaces', function(done) {
     var ee = global['store@sparkles'].customNamespace = new EventEmitter();
     ee.custom = true;
 

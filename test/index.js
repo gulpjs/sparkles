@@ -4,18 +4,18 @@ var expect = require('expect');
 
 var sparkles = require('../');
 
-function noop(){}
+function noop() {}
 
-describe('sparkles()', function(){
+describe('sparkles()', function() {
 
   var ee;
 
-  beforeEach(function(done){
+  beforeEach(function(done) {
     ee = sparkles();
     done();
   });
 
-  afterEach(function(done){
+  afterEach(function(done) {
     ee.remove();
     done();
   });
@@ -30,7 +30,7 @@ describe('sparkles()', function(){
     done();
   });
 
-  it('removes the event emitter from the store when remove is called', function(done){
+  it('removes the event emitter from the store when remove is called', function(done) {
     ee.on('test', noop);
     ee.remove();
     expect(global['store@sparkles']).toNotIncludeKey('default');
