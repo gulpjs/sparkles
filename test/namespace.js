@@ -1,11 +1,6 @@
 'use strict';
 
-var lab = exports.lab = require('lab').script();
-var describe = lab.describe;
-var it = lab.it;
-var beforeEach = lab.beforeEach;
-var afterEach = lab.afterEach;
-var expect = require('code').expect;
+var expect = require('expect');
 
 var EventEmitter = require('events').EventEmitter;
 
@@ -27,7 +22,7 @@ describe('namespace', function(){
 
     var sparkles = require('../')();
 
-    expect(sparkles.custom).to.equal('ee');
+    expect(sparkles.custom).toEqual('ee');
     done();
   });
 
@@ -37,7 +32,7 @@ describe('namespace', function(){
 
     var sparkles = require('../')('customNamespace');
 
-    expect(sparkles.custom).to.equal(true);
+    expect(sparkles.custom).toEqual(true);
     done();
   });
 });

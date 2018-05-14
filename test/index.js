@@ -1,11 +1,6 @@
 'use strict';
 
-var lab = exports.lab = require('lab').script();
-var describe = lab.describe;
-var it = lab.it;
-var beforeEach = lab.beforeEach;
-var afterEach = lab.afterEach;
-var expect = require('code').expect;
+var expect = require('expect');
 
 var sparkles = require('../');
 
@@ -25,20 +20,20 @@ describe('sparkles()', function(){
     done();
   });
 
-  it('will attach the sparkles store namespace to global', function(done){
-    expect(global['store@sparkles']).to.exist();
+  it('will attach the sparkles store namespace to global', function(done) {
+    expect(global['store@sparkles']).toExist();
     done();
   });
 
-  it('will attach an event emitter to the sparkles store default namespace', function(done){
-    expect(global['store@sparkles']).to.include('default');
+  it('will attach an event emitter to the sparkles store default namespace', function(done) {
+    expect(global['store@sparkles']).toIncludeKey('default');
     done();
   });
 
   it('removes the event emitter from the store when remove is called', function(done){
     ee.on('test', noop);
     ee.remove();
-    expect(global['store@sparkles']).to.not.include('default');
+    expect(global['store@sparkles']).toNotIncludeKey('default');
     done();
   });
 });
