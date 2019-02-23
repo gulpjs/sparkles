@@ -16,6 +16,8 @@ Sparkles exports a function that returns a singleton `EventEmitter`.
 This EE can be shared across your application, whether or not node loads
 multiple copies.
 
+Note: If you put an event handler in a file in your application, that file must be loaded in via an import somewhere in your application, even if it's not directly being used. Otherwise, it will not be loaded into memory.
+
 ```js
 var sparkles = require('sparkles')(); // make sure to call the function
 
