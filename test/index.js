@@ -21,19 +21,19 @@ describe('sparkles()', function() {
   });
 
   it('will attach the sparkles store namespace to global', function(done) {
-    expect(global['store@sparkles']).toExist();
+    expect(global['store@sparkles']).toBeTruthy();
     done();
   });
 
   it('will attach an event emitter to the sparkles store default namespace', function(done) {
-    expect(global['store@sparkles']).toIncludeKey('default');
+    expect(global['store@sparkles']).toHaveProperty('default');
     done();
   });
 
   it('removes the event emitter from the store when remove is called', function(done) {
     ee.on('test', noop);
     ee.remove();
-    expect(global['store@sparkles']).toNotIncludeKey('default');
+    expect(global['store@sparkles']).not.toHaveProperty('default');
     done();
   });
 });
