@@ -21,7 +21,7 @@ Note: If you put an event handler in a file in your application, that file must 
 ```js
 var sparkles = require('sparkles')(); // make sure to call the function
 
-sparkles.on('my-event', function(evt){
+sparkles.on('my-event', function (evt) {
   console.log('my-event handled', evt);
 });
 
@@ -32,7 +32,7 @@ sparkles.emit('my-event', { my: 'event' });
 
 ### sparkles(namespace)
 
-Returns an EventEmitter that is shared amongst the provided namespace.  If no namespace
+Returns an EventEmitter that is shared amongst the provided namespace. If no namespace
 is provided, returns a default EventEmitter.
 
 ### sparkles.exists(namespace);
@@ -50,15 +50,11 @@ MIT
 [downloads-image]: http://img.shields.io/npm/dm/sparkles.svg
 [npm-url]: https://www.npmjs.com/package/sparkles
 [npm-image]: http://img.shields.io/npm/v/sparkles.svg
-
 [travis-url]: https://travis-ci.org/gulpjs/sparkles
 [travis-image]: http://img.shields.io/travis/gulpjs/sparkles.svg?label=travis-ci
-
 [appveyor-url]: https://ci.appveyor.com/project/gulpjs/sparkles
 [appveyor-image]: https://img.shields.io/appveyor/ci/gulpjs/sparkles.svg?label=appveyor
-
 [coveralls-url]: https://coveralls.io/r/gulpjs/sparkles
 [coveralls-image]: http://img.shields.io/coveralls/gulpjs/sparkles/master.svg
-
 [gitter-url]: https://gitter.im/gulpjs/gulp
 [gitter-image]: https://badges.gitter.im/gulpjs/gulp.svg

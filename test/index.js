@@ -6,31 +6,30 @@ var sparkles = require('../');
 
 function noop() {}
 
-describe('sparkles()', function() {
-
+describe('sparkles()', function () {
   var ee;
 
-  beforeEach(function(done) {
+  beforeEach(function (done) {
     ee = sparkles();
     done();
   });
 
-  afterEach(function(done) {
+  afterEach(function (done) {
     ee.remove();
     done();
   });
 
-  it('will attach the sparkles store namespace to global', function(done) {
+  it('will attach the sparkles store namespace to global', function (done) {
     expect(global['store@sparkles']).toBeTruthy();
     done();
   });
 
-  it('will attach an event emitter to the sparkles store default namespace', function(done) {
+  it('will attach an event emitter to the sparkles store default namespace', function (done) {
     expect(global['store@sparkles']).toHaveProperty('default');
     done();
   });
 
-  it('removes the event emitter from the store when remove is called', function(done) {
+  it('removes the event emitter from the store when remove is called', function (done) {
     ee.on('test', noop);
     ee.remove();
     expect(global['store@sparkles']).not.toHaveProperty('default');

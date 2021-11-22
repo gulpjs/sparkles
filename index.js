@@ -16,7 +16,6 @@ function getStore() {
 }
 
 function getEmitter(namespace) {
-
   var store = getStore();
 
   namespace = namespace || defaultNamespace;
@@ -38,7 +37,7 @@ function getEmitter(namespace) {
 function exists(namespace) {
   var store = getStore();
 
-  return !!(store[namespace]);
+  return !!store[namespace];
 }
 
 module.exports = getEmitter;
