@@ -2,14 +2,16 @@
 
 var EventEmitter = require('events').EventEmitter;
 
-var sparklesNamespace = 'store@sparkles';
-var defaultNamespace = 'default';
+var sparklesNamespace = Symbol('store@sparkles');
+var defaultNamespace = Symbol('default');
 
 function getStore() {
   var store = global[sparklesNamespace];
 
   if (!store) {
-    store = global[sparklesNamespace] = {};
+    store = Object.defineProperty(global, sparklesNamespace, {
+      value: {}
+    });
   }
 
   return store;
