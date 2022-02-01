@@ -6,7 +6,7 @@
 
 # sparkles
 
-[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Travis Build Status][travis-image]][travis-url] [![AppVeyor Build Status][appveyor-image]][appveyor-url] [![Coveralls Status][coveralls-image]][coveralls-url] [![Gitter chat][gitter-image]][gitter-url]
+[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][ci-image]][ci-url] [![Coveralls Status][coveralls-image]][coveralls-url]
 
 Namespaced global event emitter
 
@@ -47,14 +47,14 @@ This is a "global emitter"; shortened: "glitter" but it was already taken; so we
 
 MIT
 
-[downloads-image]: http://img.shields.io/npm/dm/sparkles.svg
+<!-- prettier-ignore-start -->
+[downloads-image]: https://img.shields.io/npm/dm/sparkles.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/sparkles
-[npm-image]: http://img.shields.io/npm/v/sparkles.svg
-[travis-url]: https://travis-ci.org/gulpjs/sparkles
-[travis-image]: http://img.shields.io/travis/gulpjs/sparkles.svg?label=travis-ci
-[appveyor-url]: https://ci.appveyor.com/project/gulpjs/sparkles
-[appveyor-image]: https://img.shields.io/appveyor/ci/gulpjs/sparkles.svg?label=appveyor
+[npm-image]: https://img.shields.io/npm/v/sparkles.svg?style=flat-square
+
+[ci-url]: https://github.com/gulpjs/sparkles/actions?query=workflow:dev
+[ci-image]: https://img.shields.io/github/workflow/status/gulpjs/sparkles/dev?style=flat-square
+
 [coveralls-url]: https://coveralls.io/r/gulpjs/sparkles
-[coveralls-image]: http://img.shields.io/coveralls/gulpjs/sparkles/master.svg
-[gitter-url]: https://gitter.im/gulpjs/gulp
-[gitter-image]: https://badges.gitter.im/gulpjs/gulp.svg
+[coveralls-image]: https://img.shields.io/coveralls/gulpjs/sparkles/master.svg?style=flat-square
+<!-- prettier-ignore-end -->
