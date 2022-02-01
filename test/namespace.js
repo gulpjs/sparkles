@@ -4,7 +4,7 @@ var expect = require('expect');
 
 var EventEmitter = require('events').EventEmitter;
 
-describe('namespaces', function () {
+describe('namespace', function () {
   var storeSymbol = Symbol.for('sparkles:store');
   var namespaceSymbol = Symbol.for('sparkles:namespace');
 
