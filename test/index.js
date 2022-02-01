@@ -32,7 +32,7 @@ describe('sparkles()', function () {
     });
 
     it('removes the event emitter from the store when remove is called', function (done) {
-      ee.on('test', function () { });
+      ee.on('test', function () {});
       ee.remove();
       expect(global[storeSymbol][namespaceSymbol]).toBeUndefined();
       done();
