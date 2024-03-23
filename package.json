@@ -14,7 +14,8 @@
   "main": "index.js",
   "files": [
     "LICENSE",
-    "index.js"
+    "index.js",
+    "legacy.js"
   ],
   "scripts": {
     "lint": "eslint .",
