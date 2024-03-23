@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://www.github.com/gulpjs/sparkles/compare/v2.0.0...v2.1.0) (2024-03-23)
+
+
+### Features
+
+* Add module for accessing legacy store ([#10](https://www.github.com/gulpjs/sparkles/issues/10)) ([8a5de25](https://www.github.com/gulpjs/sparkles/commit/8a5de255442847a96e1a56c59dbd7c9ccb515fb0))
+
 ## [2.0.0](https://www.github.com/gulpjs/sparkles/compare/v1.0.1...v2.0.0) (2022-02-01)
 
 
