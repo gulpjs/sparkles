@@ -53,7 +53,7 @@ MIT
 [npm-image]: https://img.shields.io/npm/v/sparkles.svg?style=flat-square
 
 [ci-url]: https://github.com/gulpjs/sparkles/actions?query=workflow:dev
-[ci-image]: https://img.shields.io/github/workflow/status/gulpjs/sparkles/dev?style=flat-square
+[ci-image]: https://img.shields.io/github/actions/workflow/status/gulpjs/sparkles/dev.yml?branch=master&style=flat-square
 
 [coveralls-url]: https://coveralls.io/r/gulpjs/sparkles
 [coveralls-image]: https://img.shields.io/coveralls/gulpjs/sparkles/master.svg?style=flat-square
