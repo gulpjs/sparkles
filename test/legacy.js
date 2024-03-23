@@ -3,13 +3,13 @@
 var expect = require('expect');
 var EventEmitter = require('events').EventEmitter;
 
-var sparkles = require('../');
+var sparkles = require('../legacy.js');
 
-describe('sparkles()', function () {
+describe('legacy: sparkles()', function () {
   describe('behavior on global', function () {
     var ee;
-    var storeSymbol = Symbol.for('sparkles:store');
-    var namespaceSymbol = Symbol.for('sparkles:namespace');
+    var storeNamespace = 'store@sparkles';
+    var defaultNamespace = 'default';
 
     beforeEach(function (done) {
       ee = sparkles();
@@ -22,24 +22,24 @@ describe('sparkles()', function () {
     });
 
     it('will attach the sparkles store namespace to global', function (done) {
-      expect(global[storeSymbol]).toBeTruthy();
+      expect(global[storeNamespace]).toBeTruthy();
       done();
     });
 
     it('will attach an event emitter to the sparkles store default namespace', function (done) {
-      expect(global[storeSymbol][namespaceSymbol]).toBeInstanceOf(EventEmitter);
+      expect(global[storeNamespace][defaultNamespace]).toBeInstanceOf(EventEmitter);
       done();
     });
 
     it('removes the event emitter from the store when remove is called', function (done) {
       ee.on('test', function () {});
       ee.remove();
-      expect(global[storeSymbol][namespaceSymbol]).toBeUndefined();
+      expect(global[storeNamespace][defaultNamespace]).toBeUndefined();
       done();
     });
 
     it('does not show up when enumerating the global object', function (done) {
-      expect(Object.keys(global)).not.toContain(storeSymbol);
+      expect(Object.keys(global)).not.toContain(storeNamespace);
       done();
     });
   });
@@ -76,7 +76,7 @@ describe('sparkles()', function () {
   });
 });
 
-describe('sparkles.exists()', function () {
+describe('legacy: sparkles.exists()', function () {
   it('checks if a namespace has been defined', function (done) {
     expect(sparkles.exists('test')).toBe(false);
     var ee = sparkles('test');
@@ -87,22 +87,22 @@ describe('sparkles.exists()', function () {
   });
 });
 
-describe('namespace', function () {
-  var storeSymbol = Symbol.for('sparkles:store');
-  var namespaceSymbol = Symbol.for('sparkles:namespace');
+describe('legacy: namespace', function () {
+  var storeNamespace = Symbol.for('sparkles:store');
+  var defaultNamespace = Symbol.for('sparkles:namespace');
 
   beforeEach(function (done) {
-    global[storeSymbol] = {};
+    global[storeNamespace] = {};
     done();
   });
 
   afterEach(function (done) {
-    delete global[storeSymbol];
+    delete global[storeNamespace];
     done();
   });
 
   it('should use an EE from sparkles namespace if it already exists', function (done) {
-    var ee = (global[storeSymbol][namespaceSymbol] = new EventEmitter());
+    var ee = (global[storeNamespace][defaultNamespace] = new EventEmitter());
     ee.custom = 'ee';
 
     var sparkles = require('../')();
@@ -112,7 +112,7 @@ describe('namespace', function () {
   });
 
   it('should allow custom namespaces', function (done) {
-    var ee = (global[storeSymbol].customNamespace = new EventEmitter());
+    var ee = (global[storeNamespace].customNamespace = new EventEmitter());
     ee.custom = true;
 
     var sparkles = require('../')('customNamespace');
