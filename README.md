@@ -19,13 +19,13 @@ multiple copies.
 Note: If you put an event handler in a file in your application, that file must be loaded in via an import somewhere in your application, even if it's not directly being used. Otherwise, it will not be loaded into memory.
 
 ```js
-var sparkles = require('sparkles')(); // make sure to call the function
+var sparkles = require("sparkles")(); // make sure to call the function
 
-sparkles.on('my-event', function (evt) {
-  console.log('my-event handled', evt);
+sparkles.on("my-event", function (evt) {
+  console.log("my-event handled", evt);
 });
 
-sparkles.emit('my-event', { my: 'event' });
+sparkles.emit("my-event", { my: "event" });
 ```
 
 ## API

@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-var EventEmitter = require('events').EventEmitter;
+var EventEmitter = require("events").EventEmitter;
 
-var sparklesNamespace = Symbol.for('sparkles:store');
-var defaultNamespace = Symbol.for('sparkles:namespace');
+var sparklesNamespace = Symbol.for("sparkles:store");
+var defaultNamespace = Symbol.for("sparkles:namespace");
 
 function getStore() {
   var store = global[sparklesNamespace];
