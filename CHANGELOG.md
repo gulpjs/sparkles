@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/gulpjs/sparkles/compare/v2.1.0...v3.0.0) (2026-10-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* Normalize repository, dropping Node <22.15.0 ([#15](https://github.com/gulpjs/sparkles/issues/15))
+
+### Miscellaneous Chores
+
+* Normalize repository, dropping Node &lt;22.15.0 ([#15](https://github.com/gulpjs/sparkles/issues/15)) ([17e0ea4](https://github.com/gulpjs/sparkles/commit/17e0ea486ac9b15407647122f65ad755ee20b63e))
+
 ## [2.1.0](https://www.github.com/gulpjs/sparkles/compare/v2.0.0...v2.1.0) (2024-03-23)
 
 
