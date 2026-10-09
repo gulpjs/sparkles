@@ -1,15 +1,15 @@
-'use strict';
+"use strict";
 
-var expect = require('expect');
-var EventEmitter = require('events').EventEmitter;
+var expect = require("expect");
+var EventEmitter = require("events").EventEmitter;
 
-var sparkles = require('../');
+var sparkles = require("../");
 
-describe('sparkles()', function () {
-  describe('behavior on global', function () {
+describe("sparkles()", function () {
+  describe("behavior on global", function () {
     var ee;
-    var storeSymbol = Symbol.for('sparkles:store');
-    var namespaceSymbol = Symbol.for('sparkles:namespace');
+    var storeSymbol = Symbol.for("sparkles:store");
+    var namespaceSymbol = Symbol.for("sparkles:namespace");
 
     beforeEach(function (done) {
       ee = sparkles();
@@ -21,30 +21,30 @@ describe('sparkles()', function () {
       done();
     });
 
-    it('will attach the sparkles store namespace to global', function (done) {
+    it("will attach the sparkles store namespace to global", function (done) {
       expect(global[storeSymbol]).toBeTruthy();
       done();
     });
 
-    it('will attach an event emitter to the sparkles store default namespace', function (done) {
+    it("will attach an event emitter to the sparkles store default namespace", function (done) {
       expect(global[storeSymbol][namespaceSymbol]).toBeInstanceOf(EventEmitter);
       done();
     });
 
-    it('removes the event emitter from the store when remove is called', function (done) {
-      ee.on('test', function () {});
+    it("removes the event emitter from the store when remove is called", function (done) {
+      ee.on("test", function () {});
       ee.remove();
       expect(global[storeSymbol][namespaceSymbol]).toBeUndefined();
       done();
     });
 
-    it('does not show up when enumerating the global object', function (done) {
+    it("does not show up when enumerating the global object", function (done) {
       expect(Object.keys(global)).not.toContain(storeSymbol);
       done();
     });
   });
 
-  it('should get the default emitter if namespace is not specified', function (done) {
+  it("should get the default emitter if namespace is not specified", function (done) {
     var ee = sparkles();
     expect(ee).toBeInstanceOf(EventEmitter);
 
@@ -52,44 +52,44 @@ describe('sparkles()', function () {
     done();
   });
 
-  it('should get an emitter for a specified namespace', function (done) {
-    var ee = sparkles('ns1');
+  it("should get an emitter for a specified namespace", function (done) {
+    var ee = sparkles("ns1");
     expect(ee).toBeInstanceOf(EventEmitter);
 
     expect(sparkles()).not.toBe(ee);
-    expect(sparkles('ns1')).toBe(ee);
-    expect(sparkles('ns2')).not.toBe(ee);
+    expect(sparkles("ns1")).toBe(ee);
+    expect(sparkles("ns2")).not.toBe(ee);
     done();
   });
 
-  it('should remove and re-create emitter in the store', function (done) {
+  it("should remove and re-create emitter in the store", function (done) {
     var ee0 = sparkles();
-    var ee1 = sparkles('ns1');
+    var ee1 = sparkles("ns1");
 
     ee0.remove();
     expect(sparkles()).not.toBe(ee0);
-    expect(sparkles('ns1')).toBe(ee1);
+    expect(sparkles("ns1")).toBe(ee1);
 
     ee1.remove();
-    expect(sparkles('ns1')).not.toBe(ee1);
+    expect(sparkles("ns1")).not.toBe(ee1);
     done();
   });
 });
 
-describe('sparkles.exists()', function () {
-  it('checks if a namespace has been defined', function (done) {
-    expect(sparkles.exists('test')).toBe(false);
-    var ee = sparkles('test');
-    expect(sparkles.exists('test')).toBe(true);
+describe("sparkles.exists()", function () {
+  it("checks if a namespace has been defined", function (done) {
+    expect(sparkles.exists("test")).toBe(false);
+    var ee = sparkles("test");
+    expect(sparkles.exists("test")).toBe(true);
     ee.remove();
-    expect(sparkles.exists('test')).toBe(false);
+    expect(sparkles.exists("test")).toBe(false);
     done();
   });
 });
 
-describe('namespace', function () {
-  var storeSymbol = Symbol.for('sparkles:store');
-  var namespaceSymbol = Symbol.for('sparkles:namespace');
+describe("namespace", function () {
+  var storeSymbol = Symbol.for("sparkles:store");
+  var namespaceSymbol = Symbol.for("sparkles:namespace");
 
   beforeEach(function (done) {
     global[storeSymbol] = {};
@@ -101,21 +101,21 @@ describe('namespace', function () {
     done();
   });
 
-  it('should use an EE from sparkles namespace if it already exists', function (done) {
+  it("should use an EE from sparkles namespace if it already exists", function (done) {
     var ee = (global[storeSymbol][namespaceSymbol] = new EventEmitter());
-    ee.custom = 'ee';
+    ee.custom = "ee";
 
-    var sparkles = require('../')();
+    var sparkles = require("../")();
 
-    expect(sparkles.custom).toEqual('ee');
+    expect(sparkles.custom).toEqual("ee");
     done();
   });
 
-  it('should allow custom namespaces', function (done) {
+  it("should allow custom namespaces", function (done) {
     var ee = (global[storeSymbol].customNamespace = new EventEmitter());
     ee.custom = true;
 
-    var sparkles = require('../')('customNamespace');
+    var sparkles = require("../")("customNamespace");
 
     expect(sparkles.custom).toEqual(true);
     done();

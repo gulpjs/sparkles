@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="http://gulpjs.com">
+  <a href="https://gulpjs.com">
     <img height="257" width="114" src="https://raw.githubusercontent.com/gulpjs/artwork/master/gulp-2x.png">
   </a>
 </p>
@@ -19,13 +19,13 @@ multiple copies.
 Note: If you put an event handler in a file in your application, that file must be loaded in via an import somewhere in your application, even if it's not directly being used. Otherwise, it will not be loaded into memory.
 
 ```js
-var sparkles = require('sparkles')(); // make sure to call the function
+var sparkles = require("sparkles")(); // make sure to call the function
 
-sparkles.on('my-event', function (evt) {
-  console.log('my-event handled', evt);
+sparkles.on("my-event", function (evt) {
+  console.log("my-event handled", evt);
 });
 
-sparkles.emit('my-event', { my: 'event' });
+sparkles.emit("my-event", { my: "event" });
 ```
 
 ## API
@@ -43,6 +43,16 @@ Checks whether a namespace exists and returns true or false.
 
 This is a "global emitter"; shortened: "glitter" but it was already taken; so we got sparkles instead :smile:
 
+## Strict No LLM / No AI Policy
+
+No LLMs for issues.
+
+No LLMs for patches / pull requests.
+
+No LLMs for comments on the bug tracker, including translation.
+
+English is encouraged, but not required. You are welcome to post in your native language and rely on others to have their own translation tools of choice to interpret your words.
+
 ## License
 
 MIT
@@ -52,9 +62,9 @@ MIT
 [npm-url]: https://www.npmjs.com/package/sparkles
 [npm-image]: https://img.shields.io/npm/v/sparkles.svg?style=flat-square
 
-[ci-url]: https://github.com/gulpjs/sparkles/actions?query=workflow:dev
-[ci-image]: https://img.shields.io/github/actions/workflow/status/gulpjs/sparkles/dev.yml?branch=master&style=flat-square
+[ci-url]: https://github.com/gulpjs/sparkles/actions/workflows/dev.yml
+[ci-image]: https://img.shields.io/github/actions/workflow/status/gulpjs/sparkles/dev.yml?style=flat-square
 
 [coveralls-url]: https://coveralls.io/r/gulpjs/sparkles
-[coveralls-image]: https://img.shields.io/coveralls/gulpjs/sparkles/master.svg?style=flat-square
+[coveralls-image]: https://img.shields.io/coveralls/gulpjs/sparkles/main.svg?style=flat-square
 <!-- prettier-ignore-end -->
