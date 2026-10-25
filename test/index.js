@@ -35,7 +35,7 @@ describe("sparkles()", function () {
     });
 
     it("does not show up when enumerating the global object", function () {
-      assert.ok(!Object.keys(global).includes(storeSymbol));
+assert.strictEqual(Object.keys(global).includes(storeSymbol), false);
     });
   });
 
