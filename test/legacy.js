@@ -34,11 +34,11 @@ describe("legacy: sparkles()", function () {
     it("removes the event emitter from the store when remove is called", function () {
       ee.on("test", function () {});
       ee.remove();
-      assert.ok(!global[storeNamespace][defaultNamespace]);
+      assert.strictEqual(global[storeNamespace][defaultNamespace], undefined);
     });
 
     it("does not show up when enumerating the global object", function () {
-      assert.ok(!Object.keys(global).includes(storeNamespace));
+      assert.strictEqual(Object.keys(global).includes(storeNamespace), false);
     });
   });
 
@@ -74,11 +74,11 @@ describe("legacy: sparkles()", function () {
 
 describe("legacy: sparkles.exists()", function () {
   it("checks if a namespace has been defined", function () {
-    assert.ok(!sparkles.exists("test"));
+    assert.strictEqual(sparkles.exists("test"), false);
     var ee = sparkles("test");
-    assert.ok(sparkles.exists("test"));
+    assert.strictEqual(sparkles.exists("test"), true);
     ee.remove();
-    assert.ok(!sparkles.exists("test"));
+    assert.strictEqual(sparkles.exists("test"), false);
   });
 });
 
