@@ -2,8 +2,7 @@
 
 var assert = require("node:assert");
 var { afterEach, beforeEach, describe, it } = require("node:test");
-
-var EventEmitter = require("node:events").EventEmitter;
+var { EventEmitter } = require("node:events");
 
 var sparkles = require("../legacy.js");
 
