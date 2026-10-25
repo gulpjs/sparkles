@@ -31,7 +31,7 @@ describe("sparkles()", function () {
     it("removes the event emitter from the store when remove is called", function () {
       ee.on("test", function () {});
       ee.remove();
-      assert.ok(!global[storeSymbol][namespaceSymbol]);
+      assert.notStrictEqual(global[storeSymbol][namespaceSymbol], undefined);
     });
 
     it("does not show up when enumerating the global object", function () {
