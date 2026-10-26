@@ -66,45 +66,45 @@ describe("sparkles()", function () {
     ee1.remove();
     assert.notStrictEqual(sparkles("ns1"), ee1);
   });
+});
 
-  describe("sparkles.exists()", function () {
-    it("checks if a namespace has been defined", function () {
-      assert.ok(!sparkles.exists("test"));
-      var ee = sparkles("test");
-      assert.ok(sparkles.exists("test"));
-      ee.remove();
-      assert.ok(!sparkles.exists("test"));
-    });
+describe("sparkles.exists()", function () {
+  it("checks if a namespace has been defined", function () {
+    assert.ok(!sparkles.exists("test"));
+    var ee = sparkles("test");
+    assert.ok(sparkles.exists("test"));
+    ee.remove();
+    assert.ok(!sparkles.exists("test"));
+  });
+});
+
+describe("namespace", function () {
+  var storeSymbol = Symbol.for("sparkles:store");
+  var namespaceSymbol = Symbol.for("sparkles:namespace");
+
+  beforeEach(function () {
+    global[storeSymbol] = {};
   });
 
-  describe("namespace", function () {
-    var storeSymbol = Symbol.for("sparkles:store");
-    var namespaceSymbol = Symbol.for("sparkles:namespace");
+  afterEach(function () {
+    delete global[storeSymbol];
+  });
 
-    beforeEach(function () {
-      global[storeSymbol] = {};
-    });
+  it("should use an EE from sparkles namespace if it already exists", function () {
+    var ee = (global[storeSymbol][namespaceSymbol] = new EventEmitter());
+    ee.custom = "ee";
 
-    afterEach(function () {
-      delete global[storeSymbol];
-    });
+    var sparkles = require("../")();
 
-    it("should use an EE from sparkles namespace if it already exists", function () {
-      var ee = (global[storeSymbol][namespaceSymbol] = new EventEmitter());
-      ee.custom = "ee";
+    assert.strictEqual(sparkles.custom, "ee");
+  });
 
-      var sparkles = require("../")();
+  it("should allow custom namespaces", function () {
+    var ee = (global[storeSymbol].customNamespace = new EventEmitter());
+    ee.custom = true;
 
-      assert.strictEqual(sparkles.custom, "ee");
-    });
+    var sparkles = require("../")("customNamespace");
 
-    it("should allow custom namespaces", function () {
-      var ee = (global[storeSymbol].customNamespace = new EventEmitter());
-      ee.custom = true;
-
-      var sparkles = require("../")("customNamespace");
-
-      assert.ok(sparkles.custom);
-    });
+    assert.ok(sparkles.custom);
   });
 });
