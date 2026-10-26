@@ -1,7 +1,8 @@
 "use strict";
 
-var expect = require("expect");
-var EventEmitter = require("events").EventEmitter;
+var assert = require("node:assert");
+var { afterEach, beforeEach, describe, it } = require("node:test");
+var { EventEmitter } = require("node:events");
 
 var sparkles = require("../");
 
@@ -11,79 +12,69 @@ describe("sparkles()", function () {
     var storeSymbol = Symbol.for("sparkles:store");
     var namespaceSymbol = Symbol.for("sparkles:namespace");
 
-    beforeEach(function (done) {
+    beforeEach(function () {
       ee = sparkles();
-      done();
     });
 
-    afterEach(function (done) {
+    afterEach(function () {
       ee.remove();
-      done();
     });
 
-    it("will attach the sparkles store namespace to global", function (done) {
-      expect(global[storeSymbol]).toBeTruthy();
-      done();
+    it("will attach the sparkles store namespace to global", function () {
+      assert.ok(global[storeSymbol]);
     });
 
-    it("will attach an event emitter to the sparkles store default namespace", function (done) {
-      expect(global[storeSymbol][namespaceSymbol]).toBeInstanceOf(EventEmitter);
-      done();
+    it("will attach an event emitter to the sparkles store default namespace", function () {
+      assert.ok(global[storeSymbol][namespaceSymbol] instanceof EventEmitter);
     });
 
-    it("removes the event emitter from the store when remove is called", function (done) {
+    it("removes the event emitter from the store when remove is called", function () {
       ee.on("test", function () {});
       ee.remove();
-      expect(global[storeSymbol][namespaceSymbol]).toBeUndefined();
-      done();
+      assert.strictEqual(global[storeSymbol][namespaceSymbol], undefined);
     });
 
-    it("does not show up when enumerating the global object", function (done) {
-      expect(Object.keys(global)).not.toContain(storeSymbol);
-      done();
+    it("does not show up when enumerating the global object", function () {
+      assert.strictEqual(Object.keys(global).includes(storeSymbol), false);
     });
   });
 
-  it("should get the default emitter if namespace is not specified", function (done) {
+  it("should get the default emitter if namespace is not specified", function () {
     var ee = sparkles();
-    expect(ee).toBeInstanceOf(EventEmitter);
-
-    expect(sparkles()).toBe(ee);
-    done();
+    assert.ok(ee instanceof EventEmitter);
+    assert.strictEqual(sparkles(), ee);
   });
 
-  it("should get an emitter for a specified namespace", function (done) {
+  it("should get an emitter for a specified namespace", function () {
     var ee = sparkles("ns1");
-    expect(ee).toBeInstanceOf(EventEmitter);
+    assert.ok(ee instanceof EventEmitter);
 
-    expect(sparkles()).not.toBe(ee);
-    expect(sparkles("ns1")).toBe(ee);
-    expect(sparkles("ns2")).not.toBe(ee);
-    done();
+    assert.notStrictEqual(sparkles(), ee);
+
+    assert.strictEqual(sparkles("ns1"), ee);
+    assert.notStrictEqual(sparkles("ns2"), ee);
   });
 
-  it("should remove and re-create emitter in the store", function (done) {
+  it("should remove and re-create emitter in the store", function () {
     var ee0 = sparkles();
     var ee1 = sparkles("ns1");
 
     ee0.remove();
-    expect(sparkles()).not.toBe(ee0);
-    expect(sparkles("ns1")).toBe(ee1);
+    assert.notStrictEqual(sparkles(), ee0);
+    assert.strictEqual(sparkles("ns1"), ee1);
 
     ee1.remove();
-    expect(sparkles("ns1")).not.toBe(ee1);
-    done();
+    assert.notStrictEqual(sparkles("ns1"), ee1);
   });
 });
 
 describe("sparkles.exists()", function () {
-  it("checks if a namespace has been defined", function (done) {
-    expect(sparkles.exists("test")).toBe(false);
+  it("checks if a namespace has been defined", function () {
+    assert.strictEqual(sparkles.exists("test"), false);
     var ee = sparkles("test");
-    expect(sparkles.exists("test")).toBe(true);
+    assert.strictEqual(sparkles.exists("test"), true);
     ee.remove();
-    expect(sparkles.exists("test")).toBe(false);
-    done();
+    assert.strictEqual(sparkles.exists("test"), false);
   });
 });
 
@@ -91,33 +82,29 @@ describe("namespace", function () {
   var storeSymbol = Symbol.for("sparkles:store");
   var namespaceSymbol = Symbol.for("sparkles:namespace");
 
-  beforeEach(function (done) {
+  beforeEach(function () {
     global[storeSymbol] = {};
-    done();
   });
 
-  afterEach(function (done) {
+  afterEach(function () {
     delete global[storeSymbol];
-    done();
   });
 
-  it("should use an EE from sparkles namespace if it already exists", function (done) {
+  it("should use an EE from sparkles namespace if it already exists", function () {
     var ee = (global[storeSymbol][namespaceSymbol] = new EventEmitter());
     ee.custom = "ee";
 
     var sparkles = require("../")();
 
-    expect(sparkles.custom).toEqual("ee");
-    done();
+    assert.strictEqual(sparkles.custom, "ee");
   });
 
-  it("should allow custom namespaces", function (done) {
+  it("should allow custom namespaces", function () {
     var ee = (global[storeSymbol].customNamespace = new EventEmitter());
     ee.custom = true;
 
     var sparkles = require("../")("customNamespace");
 
-    expect(sparkles.custom).toEqual(true);
-    done();
+    assert.strictEqual(sparkles.custom, true);
   });
 });
