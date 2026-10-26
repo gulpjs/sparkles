@@ -70,11 +70,11 @@ describe("sparkles()", function () {
 
 describe("sparkles.exists()", function () {
   it("checks if a namespace has been defined", function () {
-    assert.ok(!sparkles.exists("test"));
+    assert.strictEqual(sparkles.exists("test"), false);
     var ee = sparkles("test");
-    assert.ok(sparkles.exists("test"));
+    assert.strictEqual(sparkles.exists("test"), true);
     ee.remove();
-    assert.ok(!sparkles.exists("test"));
+    assert.strictEqual(sparkles.exists("test"), false);
   });
 });
 
