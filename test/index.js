@@ -105,6 +105,6 @@ describe("namespace", function () {
 
     var sparkles = require("../")("customNamespace");
 
-    assert.ok(sparkles.custom);
+    assert.strictEqual(sparkles.custom, true);
   });
 });
