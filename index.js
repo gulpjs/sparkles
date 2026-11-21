@@ -1,6 +1,6 @@
-"use strict";
+import events from "events";
 
-var EventEmitter = require("events").EventEmitter;
+var EventEmitter = events.EventEmitter;
 
 var sparklesNamespace = Symbol.for("sparkles:store");
 var defaultNamespace = Symbol.for("sparkles:namespace");
@@ -15,7 +15,7 @@ function getStore() {
   return store;
 }
 
-function getEmitter(namespace) {
+export default function getEmitter(namespace) {
   var store = getStore();
 
   namespace = namespace || defaultNamespace;
@@ -34,11 +34,8 @@ function getEmitter(namespace) {
   return ee;
 }
 
-function exists(namespace) {
+export function exists(namespace) {
   var store = getStore();
 
   return !!store[namespace];
 }
-
-module.exports = getEmitter;
-module.exports.exists = exists;
