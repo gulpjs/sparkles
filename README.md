@@ -19,7 +19,7 @@ multiple copies.
 Note: If you put an event handler in a file in your application, that file must be loaded in via an import somewhere in your application, even if it's not directly being used. Otherwise, it will not be loaded into memory.
 
 ```js
-import sparkles from "sparkles";
+import sparkles, {exists} from "sparkles";
 
 sparkles(); // make sure to call the function
 
@@ -37,7 +37,7 @@ sparkles.emit("my-event", { my: "event" });
 Returns an EventEmitter that is shared amongst the provided namespace. If no namespace
 is provided, returns a default EventEmitter.
 
-### sparkles.exists(namespace);
+### exists(namespace);
 
 Checks whether a namespace exists and returns true or false.
 
