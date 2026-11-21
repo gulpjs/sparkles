@@ -19,7 +19,7 @@ multiple copies.
 Note: If you put an event handler in a file in your application, that file must be loaded in via an import somewhere in your application, even if it's not directly being used. Otherwise, it will not be loaded into memory.
 
 ```js
-import sparkles, {exists} from "sparkles";
+import sparkles, { exists } from "sparkles";
 
 sparkles(); // make sure to call the function
 
