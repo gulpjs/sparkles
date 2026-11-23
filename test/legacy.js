@@ -83,23 +83,32 @@ describe("legacy: namespace", function () {
   var storeNamespace = "store@sparkles";
   var defaultNamespace = "default";
 
+  beforeEach(function () {
+    global[storeNamespace] = {};
+  });
+
+  afterEach(function () {
+    delete global[storeNamespace][defaultNamespace];
+    delete global[storeNamespace].customNamespace;
+  });
+
   it("should use an EE from sparkles namespace if it already exists", async () => {
     var ee = (global[storeNamespace][defaultNamespace] = new EventEmitter());
     ee.custom = "ee";
 
-    var legacySparklesImport = await import("../legacy.js");
-    var legacySparkles = legacySparklesImport.default();
+    var { default: sparkles } = await import("../legacy.js");
+    var ee2 = sparkles();
 
-    assert.strictEqual(legacySparkles.custom, "ee");
+    assert.strictEqual(ee2.custom, "ee");
   });
 
   it("should allow custom namespaces", async () => {
     var ee = (global[storeNamespace].customNamespace = new EventEmitter());
     ee.custom = true;
 
-    var legacySparklesImport = await import("../legacy.js");
-    var legacySparkles = legacySparklesImport.default();
+    var { default: sparkles } = await import("../legacy.js");
+    var ee2 = sparkles("customNamespace");
 
-    assert.strictEqual(legacySparkles.custom, true);
+    assert.strictEqual(ee2.custom, true);
   });
 });

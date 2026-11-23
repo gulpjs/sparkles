@@ -92,19 +92,19 @@ describe("namespace", function () {
     var ee = (global[storeSymbol][namespaceSymbol] = new EventEmitter());
     ee.custom = "ee";
 
-    var nonCachedImport = await import("../index.js");
-    var sparkles = nonCachedImport.default();
+    var { default: sparkles } = await import("../index.js");
+    var ee2 = sparkles();
 
-    assert.strictEqual(sparkles.custom, "ee");
+    assert.strictEqual(ee2.custom, "ee");
   });
 
   it("should allow custom namespaces", async () => {
     var ee = (global[storeSymbol].customNamespace = new EventEmitter());
     ee.custom = true;
 
-    var nonCachedImport = await import("../index.js");
-    var sparkles = nonCachedImport.default("customNamespace");
+    var { default: sparkles } = await import("../index.js");
+    var ee2 = sparkles("customNamespace");
 
-    assert.strictEqual(sparkles.custom, true);
+    assert.strictEqual(ee2.custom, true);
   });
 });
