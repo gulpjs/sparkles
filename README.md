@@ -19,7 +19,9 @@ multiple copies.
 Note: If you put an event handler in a file in your application, that file must be loaded in via an import somewhere in your application, even if it's not directly being used. Otherwise, it will not be loaded into memory.
 
 ```js
-var sparkles = require("sparkles")(); // make sure to call the function
+import sparkles from "sparkles";
+
+const emitter = sparkles();
 
 sparkles.on("my-event", function (evt) {
   console.log("my-event handled", evt);
@@ -35,7 +37,7 @@ sparkles.emit("my-event", { my: "event" });
 Returns an EventEmitter that is shared amongst the provided namespace. If no namespace
 is provided, returns a default EventEmitter.
 
-### sparkles.exists(namespace);
+### exists(namespace);
 
 Checks whether a namespace exists and returns true or false.
 

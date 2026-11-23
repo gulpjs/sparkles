@@ -1,10 +1,8 @@
-"use strict";
+import assert from "node:assert";
+import { afterEach, beforeEach, describe, it } from "node:test";
+import { EventEmitter } from "node:events";
 
-var assert = require("node:assert");
-var { afterEach, beforeEach, describe, it } = require("node:test");
-var { EventEmitter } = require("node:events");
-
-var sparkles = require("../");
+import sparkles, { exists } from "../index.js";
 
 describe("sparkles()", function () {
   describe("behavior on global", function () {
@@ -68,13 +66,13 @@ describe("sparkles()", function () {
   });
 });
 
-describe("sparkles.exists()", function () {
+describe("exists()", function () {
   it("checks if a namespace has been defined", function () {
-    assert.strictEqual(sparkles.exists("test"), false);
+    assert.strictEqual(exists("test"), false);
     var ee = sparkles("test");
-    assert.strictEqual(sparkles.exists("test"), true);
+    assert.strictEqual(exists("test"), true);
     ee.remove();
-    assert.strictEqual(sparkles.exists("test"), false);
+    assert.strictEqual(exists("test"), false);
   });
 });
 
@@ -90,21 +88,23 @@ describe("namespace", function () {
     delete global[storeSymbol];
   });
 
-  it("should use an EE from sparkles namespace if it already exists", function () {
+  it("should use an EE from sparkles namespace if it already exists", async () => {
     var ee = (global[storeSymbol][namespaceSymbol] = new EventEmitter());
     ee.custom = "ee";
 
-    var sparkles = require("../")();
+    var { default: sparkles } = await import("../index.js");
+    var ee2 = sparkles();
 
-    assert.strictEqual(sparkles.custom, "ee");
+    assert.strictEqual(ee2.custom, "ee");
   });
 
-  it("should allow custom namespaces", function () {
+  it("should allow custom namespaces", async () => {
     var ee = (global[storeSymbol].customNamespace = new EventEmitter());
     ee.custom = true;
 
-    var sparkles = require("../")("customNamespace");
+    var { default: sparkles } = await import("../index.js");
+    var ee2 = sparkles("customNamespace");
 
-    assert.strictEqual(sparkles.custom, true);
+    assert.strictEqual(ee2.custom, true);
   });
 });
