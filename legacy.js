@@ -1,6 +1,5 @@
-import events from "events";
+import { EventEmitter } from "events";
 
-var EventEmitter = events.EventEmitter;
 
 var sparklesNamespace = "store@sparkles";
 var defaultNamespace = "default";

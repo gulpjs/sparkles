@@ -1,6 +1,5 @@
-import events from "events";
+import { EventEmitter } from "events";
 
-var EventEmitter = events.EventEmitter;
 
 var sparklesNamespace = Symbol.for("sparkles:store");
 var defaultNamespace = Symbol.for("sparkles:namespace");

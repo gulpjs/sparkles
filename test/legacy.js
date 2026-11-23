@@ -86,13 +86,11 @@ describe("legacy: namespace", function () {
   var defaultNamespace = "default";
 
   beforeEach(function () {
-    delete global[storeNamespace][defaultNamespace];
-    delete global[storeNamespace].customNamespace;
+    global[storeNamespace] = {};
   });
 
   afterEach(function () {
-    delete global[storeNamespace][defaultNamespace];
-    delete global[storeNamespace].customNamespace;
+    delete global[storeNamespace];
   });
 
   it("should use an EE from sparkles namespace if it already exists", async () => {
