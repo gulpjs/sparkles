@@ -17,10 +17,10 @@
   },
   "type": "module",
   "main": "./index.js",
-  "exports": [
-    "./index.js",
-    "./legacy.js"
-  ],
+  "exports": {
+    ".": "./index.js",
+    "./legacy": "./legacy.js"
+  },
   "files": [
     "LICENSE",
     "index.js",

@@ -1,5 +1,3 @@
-"use strict";
-
 import assert from "node:assert";
 import { afterEach, beforeEach, describe, it } from "node:test";
 import { EventEmitter } from "node:events";
@@ -85,29 +83,23 @@ describe("legacy: namespace", function () {
   var storeNamespace = "store@sparkles";
   var defaultNamespace = "default";
 
-  beforeEach(function () {
-    global[storeNamespace] = {};
-  });
-
-  afterEach(function () {
-    delete global[storeNamespace];
-  });
-
   it("should use an EE from sparkles namespace if it already exists", async () => {
     var ee = (global[storeNamespace][defaultNamespace] = new EventEmitter());
     ee.custom = "ee";
 
-    var sparkles = (await import("../legacy.js")).default();
+    var legacySparklesImport = await import("../legacy.js");
+    var legacySparkles = legacySparklesImport.default();
 
-    assert.strictEqual(sparkles.custom, "ee");
+    assert.strictEqual(legacySparkles.custom, "ee");
   });
 
   it("should allow custom namespaces", async () => {
     var ee = (global[storeNamespace].customNamespace = new EventEmitter());
     ee.custom = true;
 
-    var sparkles = (await import("../legacy.js")).default("customNamespace");
+    var legacySparklesImport = await import("../legacy.js");
+    var legacySparkles = legacySparklesImport.default();
 
-    assert.strictEqual(sparkles.custom, true);
+    assert.strictEqual(legacySparkles.custom, true);
   });
 });

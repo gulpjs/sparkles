@@ -1,5 +1,3 @@
-"use strict";
-
 import assert from "node:assert";
 import { afterEach, beforeEach, describe, it } from "node:test";
 import { EventEmitter } from "node:events";
@@ -94,7 +92,8 @@ describe("namespace", function () {
     var ee = (global[storeSymbol][namespaceSymbol] = new EventEmitter());
     ee.custom = "ee";
 
-    var sparkles = (await import("../index.js")).default();
+    var nonCachedImport = await import("../index.js");
+    var sparkles = nonCachedImport.default();
 
     assert.strictEqual(sparkles.custom, "ee");
   });
@@ -103,7 +102,8 @@ describe("namespace", function () {
     var ee = (global[storeSymbol].customNamespace = new EventEmitter());
     ee.custom = true;
 
-    var sparkles = (await import("../index.js")).default("customNamespace");
+    var nonCachedImport = await import("../index.js");
+    var sparkles = nonCachedImport.default("customNamespace");
 
     assert.strictEqual(sparkles.custom, true);
   });

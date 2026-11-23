@@ -1,6 +1,5 @@
 import { EventEmitter } from "events";
 
-
 var sparklesNamespace = "store@sparkles";
 var defaultNamespace = "default";
 
